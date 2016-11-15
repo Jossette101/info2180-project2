@@ -31,6 +31,7 @@ $(document).ready(function(){
 				$(listArray[j]).click(function(){
 					console.log(this);
 					moveTile(this);
+					checkNeighbor(this);
 				});
 		}
 	}
@@ -53,8 +54,16 @@ $(document).ready(function(){
 		
 	}
 	
-	function checkTile(tile){
-		var neigh1 = 
+	function checkNeighbor(tile){
+		
+		if(($(tile).position().left > emptySpaceLeft)){
+			console.log("this is a neighbor");
+			$(tile).addClass("movablepiece");
+		}
+		if(($(tile).position().left < emptySpaceLeft)){
+			console.log("this is also a neighbor");
+			$(tile).addClass("movablepiece");
+		}
 	}
 	
 });
