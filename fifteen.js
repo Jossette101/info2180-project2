@@ -1,5 +1,7 @@
 
 $(document).ready(function(){
+	var emptySpaceTop = 0;
+	var emptySpaceLeft = 300;
 	var listArray = [];
 	$("#puzzlearea > div").each(function addToArray(){ 			//select the divs in within puzzlearea and push them to an array
 		listArray.push(this);
@@ -26,38 +28,34 @@ $(document).ready(function(){
 					imgTop = 0;
 				}
 				
-				
+				$(listArray[j]).click(function(){
+					console.log(this);
+					moveTile(this);
+				});
 		}
 	}
 	
 	setClass();
 	function moveTile(tile){ //takes a tile, checks it position and then move the tile based on where it was
-		var tilePosition = tile.position();
-		var tileTop;
-		var tileLeft;
-		var tileBottom;
-		var tileRight;
-		var positionOne = 0;
-		var positionTwo = 100;
-		var positionThree = 200;
-		var positionFour = 300;
 		
-		if(tilePosition == $(this).css("top")){
-			tileBottom = tilePosition.position().top += 100;
-			tile.animate({top: tileBottom.toString()});
-			alert($(tile).position());
-		}
-		/*if(tilePosition == $(this).css(){
-			tileTop = tilePosition.position.top -= 100;
-			tile.animate({top: tileTop.toString()});
-		}
-		if(tilePosition == $(this).css("")){
-			tileLeft = tilePosition.position.left += 100;
-			tile.animate({left: tileLeft.toString()});
-		}*/
+		var tilePositionLeft = $(tile).position().left;
+		var tilePositionTop = $(tile).position().top;
+		
+		console.log(tilePositionLeft);
+		
+		$(tile).css({left: emptySpaceLeft + "px", top: emptySpaceTop + "px"});
+		
+		console.log($(tile).position().left);
+		
+		emptySpaceLeft = tilePositionLeft;
+		emptySpaceTop = tilePositionTop;
+		console.log(emptySpaceLeft);
 		
 	}
 	
-	moveTile(1);
+	function checkTile(tile){
+		var neigh1 = 
+	}
+	
 });
 
