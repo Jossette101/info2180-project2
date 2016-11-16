@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var emptySpaceLeft = 300;
 	var listArray = [];
 	$("#puzzlearea > div").each(function addToArray(){ 			//select the divs in within puzzlearea and push them to an array
-		listArray.push(this);
+		listArray.push($(this));
 	});
 	function setClass(){      //declares variables for the boxes and the image
 		var boxLeft = 0;
@@ -29,14 +29,17 @@ $(document).ready(function(){
 				}
 				
 				$(listArray[j]).click(function(){
-					console.log(this);
-					moveTile(this);
-					checkNeighbor(this);
+					if(checkMovable($(this))){
+						moveTile($(this));
+						checkNeighbor();
+					}
 				});
 		}
 	}
 	
 	setClass();
+	
+	
 	function moveTile(tile){ //takes a tile, checks it position and then move the tile based on where it was
 		
 		var tilePositionLeft = $(tile).position().left;
@@ -53,10 +56,21 @@ $(document).ready(function(){
 		console.log(emptySpaceLeft);
 		
 	}
-	
-	function checkNeighbor(tile){
+	/*
+	* This just checks if a tile can move and returns T or F
+	*/
+	function checkMovable(tile){
+		//var currentEmptySpace = $(tile).position().left
+		var pos = tile.position();
 		
-		if(($(tile).position().left > emptySpaceLeft)){
+		move_left = pos.left - 100;
+		move_right = pos.left + 100;
+		
+		if(move_left = emptySpaceLeft && pos.top == emptySpaceTop){
+			return true;
+		}
+		
+		/*if(($(tile).position().left > emptySpaceLeft)){
 			console.log("this is a neighbor");
 			$(tile).addClass("movablepiece");
 		}
@@ -64,6 +78,19 @@ $(document).ready(function(){
 			console.log("this is also a neighbor");
 			$(tile).addClass("movablepiece");
 		}
+		if($(tile)*/
+		return false;
+	}
+	
+	/*
+	* This function does the actual highlighting of adjacent tiles
+	*/
+	function checkNeighbor(){
+		for(var i=0; i<listArray.length; i++){
+			if(checkMovable(listArray[i])){
+				listArray[i].addClass("movablepiece");
+				}
+			}
 	}
 	
 });
