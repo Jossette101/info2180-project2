@@ -34,6 +34,9 @@ $(document).ready(function(){
 						checkNeighbor();
 					}
 				});
+				$("#shufflebutton").click(function(){
+					randomizedPositions();
+				});
 		}
 	}
 	
@@ -65,8 +68,13 @@ $(document).ready(function(){
 		
 		move_left = pos.left - 100;
 		move_right = pos.left + 100;
+		move_top = pos.top - 100;
+		move_bottom = pos.top + 100;
 		
 		if(move_left = emptySpaceLeft && pos.top == emptySpaceTop){
+			return true;
+		}
+		if(move_top = emptySpaceLeft - 200 && pos.top !== emptySpaceTop){
 			return true;
 		}
 		
@@ -93,5 +101,30 @@ $(document).ready(function(){
 			}
 	}
 	
+	function randomizedPositions(){ 		//randomly assign position to a tile
+		var newPosLeft = emptySpaceLeft - 100;
+		var newPosRight = emptySpaceLeft + 100;
+		var newPosTop = emptySpaceTop + 100;
+		for(var i =0; i < listArray.length; i++){
+			$(listArray[i]).animate({left: newPosLeft, top: newPosTop});
+		}
+			
+	}
+	
+	/*function animateAll(list){
+		list = ListArray;
+		for (var j = 0; j < listArray.length; j++)
+			$(listArray[j)].each(function(){
+				randomizedPositions(this);
+				
+			});
+	}
+	
+	function shuffle(){
+		$("#shufflebutton").click(function(){
+			animateAll(this);
+		});
+	}
+	*/
 });
 
